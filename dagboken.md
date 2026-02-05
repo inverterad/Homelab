@@ -1,3 +1,25 @@
+# 2025-02-05
+
+En liten uppdatering, jag blev tvungen att resetta lösenordet då jag hade glömt bort det, måste vara in i servern oftare så jag inte glömmer bort.
+
+Det löste jag med hjälp av AI, fick instruktionerna:
+
+        # Reboota, håll in shift/esc för att komma in i GRUB
+        Advanced Mode
+        Recovery Mode
+        root (drop to root shell prompt)
+        mount -o remount,rw /
+
+        passwd username
+
+        reboot
+
+Det är inte exakt som jag minns det, men ungefär korrekt. Spännande var det i alla fall.
+
+Efter det har jag justerat docker-container och samba-inställningarna, jag har lagt till en ny katalog för musik och av någon anledning så kan jag streama Mad God utan problem nu. Så det är kul!
+
+Fortsättning följer.
+
 # 2025-12-01
 ## Docker
 Nu följer jag den här instruktionen för att installera Docker: https://docs.docker.com/engine/install/ubuntu/ <br>
@@ -28,21 +50,20 @@ Ett viktigt kommando: <br>
 Allt verkar fungera, så nu ett faktiskt test.. <br>
 
 ## Jellyfin via Docker
-Då följer jag instruktionerna på: https://jellyfin.org/docs/general/installation/container/?method=docker-cli <br><br>
-<code>docker pull jellyfin/jellyfin</code><br>
-<code>docker volume create jellyfin-config</code><br>
-<code>docker volume create jellyfin-cache</code><br><br>
-<code>docker run -d \\<br>
---name jellyfin \\<br>
--p 8096:8096/tcp \\<br>
--p 7359:7359/udp \\<br>
---volume jellyfin-config:/config \\<br>
---volume jellyfin-cache:/cache \\<br>
---mount type=bind,source=/srv/share,target=/media \\<br>
---restart=unless-stopped \\<br>
-jellyfin/jellyfin<br>
-</code><br>
-Det fungerar, jag kan koppla upp mig mot min jellyfin från min stationära (den här) datorn. Men den kan inte spela upp video åt mig, direkt jag försöker så fryser bilden och ingenting händer. Det verkar potentiellt ha med hardware acceleration att göra, men jag är osäker. Får titta närmare så snart jag kan.<br>
+Då följer jag instruktionerna på: https://jellyfin.org/docs/general/installation/container/?method=docker-cli
+
+Först tar vi hem jellyfin, sedan skapar vi volymer vi kommer behöva
+
+        docker pull jellyfin/jellyfin
+        docker volume create jellyfin-config
+        docker volume create jellyfin-cache
+
+Sedan kör vi igång alltihop
+
+        docker run -d --name jellyfin -p 8096:8096/tcp -p 7359:7359/udp 1 --volume jellyfin-config:/config --volume jellyfin-cache:/cache --mount type=bind,source=/srv/share,target=/media --restart=unless-stopped jellyfin/jellyfin
+
+
+Det fungerar, jag kan koppla upp mig mot min jellyfin från min stationära (den här) datorn. Men den kan inte spela upp video åt mig, direkt jag försöker så fryser bilden och ingenting händer. Det verkar potentiellt ha med hardware acceleration att göra, men jag är osäker. Får titta närmare så snart jag kan.
 
 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html Blir guiden jag följer för att installera möjligheten att använda mig av mitt grafikkort när jag ska spela upp från jellyfin.
 
