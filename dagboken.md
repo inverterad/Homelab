@@ -1,3 +1,9 @@
+# 2025-03-01
+
+Jag har lagt upp lite media och bara testat via telefonen så att allt fungerar korrekt. Jag laddade upp några skivor jag äger på Bandcamp, och det fungerar ju hur bra som helst såhär lokalt, nästa steg borde bli att göra det här tillgängligt ute på stan?
+
+![Jellyfin på mobilen](Screenshots/Screenshot_20260301-085645.png)
+
 # 2025-02-05
 
 En liten uppdatering, jag blev tvungen att resetta lösenordet då jag hade glömt bort det, måste vara in i servern oftare så jag inte glömmer bort.
