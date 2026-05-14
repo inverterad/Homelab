@@ -57,6 +57,9 @@ Det här fungerade inte som jag hade hoppats. Jag får det inte att fungera, Spl
 
 Det blir att ladda hem [en respekterad sysmonconfig](https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml) och så håller vi tummarna.
 
+Det fungerade inte, sysmon verkar inte vilja visa upp nätverksgrejer i Splunk av någon anledning, så för att komma vidare kör jag på ett annat spår. Startar loggning via brandväggen istället.
+
+
     Set-NetFirewallProfile -Profile Domain,Public,Private -LogFileName "C:\Windows\System32\LogFiles\Firewall\pfirewall.log" -LogMaxSizeKilobytes 32767 -LogAllowed True -LogBlocked True
 
 Lägger till
